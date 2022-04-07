@@ -1,0 +1,4 @@
+[submodule "vendor/recaptcha"]
+	path = vendor/recaptcha
+	url = https://github.com/google/recaptcha.git
+	branch = master
