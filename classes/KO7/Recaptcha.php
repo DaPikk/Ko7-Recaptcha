@@ -5,6 +5,7 @@
  * @author     	Kristjan Tarjus <kristjan@tarjus.ee>
  * @copyright  	Copyright (c) 2021 Kristjan Tarjus
  * @license    	MIT
+ * @version	v.1.1.0
  * @package 	Koseven
  */
 class KO7_Recaptcha {
