@@ -39,6 +39,10 @@ To initialize reCaptcha check form on Your page:
 ```php
 <?php echo Recaptcha::instance()->get_html(); ?>
 ```
+Or if multiple captchas are needed on same page then to provide some unique ID with request:
+```php
+<?php echo Recaptcha::instance()->get_html('uniqueid12345'); ?>
+```
 
 To check verification from POST:
 ```php
