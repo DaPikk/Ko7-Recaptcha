@@ -1,6 +1,7 @@
 ![PHP workflow](https://github.com/DaPikk/Ko7-Recaptcha/actions/workflows/php.yml/badge.svg)
 ![Required minimum PHP Version](https://img.shields.io/badge/PHP-=>7.4-blue)
 [![Required minimum Ko7even Version](https://img.shields.io/badge/Ko7even-=>3.3.8-blue)](https://github.com/koseven/koseven)
+[![Required minimum Google/reCaptcha Version](https://img.shields.io/badge/reCaptcha-=>1.3.0-blue)](https://github.com/google/recaptcha)
 
 
 # Simple wrapper for Google's reCAPTCHA library
@@ -15,6 +16,7 @@ and extract into your project.
 ## Requires
 * PHP => 7.4
 * Ko7even => 3.3.8
+* Google/reCaptcha => 1.3.0
 
 ## Usage
 1. First obtain the appropriate keys for the type of reCAPTCHA you wish to
