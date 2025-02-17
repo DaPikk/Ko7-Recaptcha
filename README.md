@@ -1,6 +1,6 @@
 ![PHP workflow](https://github.com/DaPikk/Ko7-Recaptcha/actions/workflows/php.yml/badge.svg)
 ![Required minimum PHP Version](https://img.shields.io/badge/PHP-=>7.4-blue)
-![Required minimum Ko7even Version](https://img.shields.io/badge/Ko7even-=>3.3.8-blue)
+[![Required minimum Ko7even Version](https://img.shields.io/badge/Ko7even-=>3.3.8-blue)](https://github.com/koseven/koseven)
 
 
 # Simple wrapper for Google's reCAPTCHA library
