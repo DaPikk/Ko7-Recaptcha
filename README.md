@@ -1,3 +1,5 @@
+![PHP workflow](https://github.com/DaPikk/Ko7-Recaptcha/actions/workflows/php.yml/badge.svg)
+
 # Simple wrapper for Google's reCAPTCHA library
 
 A single class that allows you to add Google reCAPTCHA to your Ko7 forms. Code is very simple.
