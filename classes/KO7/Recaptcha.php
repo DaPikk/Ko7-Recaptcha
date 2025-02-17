@@ -77,7 +77,7 @@ class KO7_Recaptcha {
 
 		if (empty($config))
 		{
-			$config = KO7::$config->load('recaptcha');
+			$config = Kohana::$config->load('recaptcha');
 		}
 		$this->_public_key = $config['public_key'];
 		$this->_private_key = $config['private_key'];
