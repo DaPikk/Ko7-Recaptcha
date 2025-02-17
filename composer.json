@@ -1,5 +1,7 @@
 {
   "name": "dapikk/ko7-recaptcha",
+  "description": "Simple wrapper for Ko7even MVC for Google's reCAPTCHA library",
+  "license": "MIT",
   "repositories": [
     {
       "type": "package",
