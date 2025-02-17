@@ -102,6 +102,7 @@ class KO7_Recaptcha {
 	 */
 	public function get_html()
 	{
+		$version = $this->_version;  // Check version in config
 		if ($version === 'v3') {
 	            // reCAPTCHA v3: Generate script and hidden token field
 	            return $this->get_html_v3();
@@ -121,7 +122,7 @@ class KO7_Recaptcha {
 	// Generate HTML for reCAPTCHA v3
     	public function get_html_v3()
     	{
-		$version = $this->_version;  // Check version in config
+		
 		$controller_name = Request::instance()->controller();
 		$action_name = Request::instance()->action();
 	        $action = strtolower($controller_name.":".$action_name);  // Define a default action (e.g., 'homepage'). Can be customized as needed.
