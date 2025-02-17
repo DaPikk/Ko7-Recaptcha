@@ -2,6 +2,7 @@
 ![Required minimum PHP Version](https://img.shields.io/badge/PHP-=>7.4-blue)
 [![Required minimum Ko7even Version](https://img.shields.io/badge/Ko7even-=>3.3.8-blue)](https://github.com/koseven/koseven)
 [![Required minimum Google/reCaptcha Version](https://img.shields.io/badge/reCaptcha-=>1.3.0-blue)](https://github.com/google/recaptcha)
+[![Github Issues](https://img.shields.io/github/issues/dapikk/ko7-recaptcha.svg)](https://github.com/dapikk/ko7-recaptcha/issues)
 
 
 # Simple wrapper for Google's reCAPTCHA library
