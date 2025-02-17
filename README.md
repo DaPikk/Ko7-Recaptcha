@@ -26,6 +26,15 @@ integrate for v2 at https://www.google.com/recaptcha/admin
 3. Make needed changes to configuration array!
 4. Activate recaptcha module in bootstrap!
 
+To activate module:
+```php
+Kohana::modules([
+...
+    'recaptcha' => MODPATH . 'recaptcha',
+...
+]);
+```
+
 To initialize reCaptcha check form on Your page:
 ```php
 <?php echo Recaptcha::instance()->get_html(); ?>
