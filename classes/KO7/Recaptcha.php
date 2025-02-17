@@ -2,10 +2,10 @@
 /**
  * Simple wrapper module for Googles reCAPTCHA library
  *
- * @author     Kristjan Tarjus <kristjan@tarjus.ee>
- * @copyright  Copyright (c) 2021 Kristjan Tarjus
- * @license    MIT
- * @package Koseven
+ * @author     	Kristjan Tarjus <kristjan@tarjus.ee>
+ * @copyright  	Copyright (c) 2021 Kristjan Tarjus
+ * @license    	MIT
+ * @package 	Koseven
  */
 class KO7_Recaptcha {
 
@@ -20,6 +20,18 @@ class KO7_Recaptcha {
 	 * @var string
 	 */
 	protected $_private_key;
+
+	/**
+	 * Version
+	 * @var string
+	 */
+	protected $_version;
+
+	/**
+	 * Score for v3
+	 * @var string 
+	 */
+	protected $_rscore;
         
         /**
 	 * Theme to use
@@ -69,9 +81,11 @@ class KO7_Recaptcha {
 		}
 		$this->_public_key = $config['public_key'];
 		$this->_private_key = $config['private_key'];
+		$this->_version = $config['version'];
                 $this->_theme = $config['theme'];
                 $this->_dsize = $config['dsize'];
                 $this->_dlang = $config['dlang'];
+		$this->_rscore = ((isset($config['rscore'])?$config['rscore']:"0.5"); //onlu needed for v3
                 if(!isset($this->_recaptcha)||empty($this->_recaptcha)||$this->_recaptcha===FALSE){
                     $this->_recaptcha = new \ReCaptcha\ReCaptcha($this->_private_key);
                 }
@@ -88,9 +102,44 @@ class KO7_Recaptcha {
 	 */
 	public function get_html()
 	{
+		if ($version === 'v3') {
+	            // reCAPTCHA v3: Generate script and hidden token field
+	            return $this->get_html_v3();
+	        } else {
+	            // reCAPTCHA v2: Render the usual widget (for backward compatibility)
+	            return $this->get_html_v2();
+	        }
+	}
+
+	// Generate HTML for reCAPTCHA v2
+    	public function get_html_v2()
+    	{
 		return '<script src="https://www.google.com/recaptcha/api.js?explicit&hl='.$this->_dlang.'" async defer></script>'
                         . '<div class="g-recaptcha w100" data-sitekey="'.$this->_public_key.'" data-theme="'.$this->_theme.'" data-size="'.$this->_dsize.'"></div>';
 	}
+
+	// Generate HTML for reCAPTCHA v3
+    	public function get_html_v3()
+    	{
+		$version = $this->_version;  // Check version in config
+		$controller_name = Request::instance()->controller();
+		$action_name = Request::instance()->action();
+	        $action = strtolower($controller_name.":".$action_name);  // Define a default action (e.g., 'homepage'). Can be customized as needed.
+	
+	        // Generate the reCAPTCHA v3 HTML (involves including the reCAPTCHA script)
+	        $html = '<script src="https://www.google.com/recaptcha/api.js?hl='.$this->_dlang.'&render='.$this->_public_key.'"></script>';
+	        $html .= '<script>
+	                    grecaptcha.ready(function() {
+	                        grecaptcha.execute("'.$this->_public_key. '", {action: "' . $action . '"}).then(function(token) {
+	                            // Add the token to the form
+	                            document.getElementById("recaptcha-token").value = token;
+	                        });
+	                    });
+	                  </script>';
+	        $html .= '<input type="hidden" name="recaptcha_token" id="recaptcha-token">'; // Hidden field for the token
+	
+	        return $html;
+    	}
 
 	/**
 	 * Returns bool true if successful, bool false if not.
@@ -98,16 +147,48 @@ class KO7_Recaptcha {
 	 * @param   string  $gRecaptchaResponse
 	 * @return  bool
 	 */
-	public function check($gRecaptchaResponse)
+	public function check($response)
 	{
-                $resp = $this->_recaptcha->setExpectedHostname($_SERVER['HTTP_HOST'])
-                                  ->verify($gRecaptchaResponse, Request::$client_ip);
-                if ($resp->isSuccess()) {
-                    return TRUE;
-                } else {
-                    $this->_error = $resp->getErrorCodes();
-                }
+		$version = $this->_version;  // Check version in config
+
+		if ($version === 'v3') {
+	            // reCAPTCHA v3 logic
+	            return $this->check_v3($response);
+	        } else {
+	            // reCAPTCHA v2 logic (default)
+	            return $this->check_v2($response);
+	        }
+			return FALSE;
+		}
+
+	// Verify reCAPTCHA v2 (existing method)
+    	public function check_v2($response)
+    	{
+		$resp = $this->_recaptcha->setExpectedHostname($_SERVER['HTTP_HOST'])
+	                                  ->verify($response, Request::$client_ip);
+		if ($resp->isSuccess()) {
+		    return TRUE;
+		} else {
+		    $this->_error = $resp->getErrorCodes();
+		}
 		return FALSE;
-	}
+    	}
+
+    	// Verify reCAPTCHA v3
+   	public function check_v3($response)
+    	{
+		 // Verify the response token with Google
+	        $verification = $this->_recaptcha->setExpectedHostname($_SERVER['HTTP_HOST'])
+					->verify($response, Request::$client_ip);
+	
+	        // Check if the verification was successful and the score is valid
+		if($verification->isSuccess() && $verification->getScore() >= $this->_rscore){
+			return TRUE;
+		}
+	        else {
+		    $this->_error = __CLASS__." ".$this->_version." verification failed";
+		}
+		return FALSE;
+    	}
 
 }
