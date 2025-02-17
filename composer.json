@@ -6,7 +6,7 @@
     {
       "type": "package",
       "package": {
-        "name": "DaPikk/Ko7-Recaptcha",
+        "name": "dapikk/ko7-recaptcha",
         "version": "1.0.0",
         "type": "module",
         "source": {
