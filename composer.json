@@ -16,7 +16,6 @@
     }
   ],
   "require": {
-    "dapikk/ko7-recaptcha": "^1",
     "composer/installers": "^1"
   }
 }
