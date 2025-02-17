@@ -101,27 +101,27 @@ class KO7_Recaptcha {
 	 *
 	 * @return  string
 	 */
-	public function get_html()
+	public function get_html($fid=FALSE)
 	{
 		$version = $this->_version;  // Check version in config
 		if ($version === 'v3') {
 	            // reCAPTCHA v3: Generate script and hidden token field
-	            return $this->get_html_v3();
+	            return $this->get_html_v3($fid);
 	        } else {
 	            // reCAPTCHA v2: Render the usual widget (for backward compatibility)
-	            return $this->get_html_v2();
+	            return $this->get_html_v2($fid);
 	        }
 	}
 
 	// Generate HTML for reCAPTCHA v2
-    	public function get_html_v2()
+    	public function get_html_v2($fid=FALSE)
     	{
 		return '<script src="https://www.google.com/recaptcha/api.js?explicit&hl='.$this->_dlang.'" async defer></script>'
-                        . '<div class="g-recaptcha w100" data-sitekey="'.$this->_public_key.'" data-theme="'.$this->_theme.'" data-size="'.$this->_dsize.'"></div>';
+                        . '<div '.(($fid!==FALSE)?'id="'.$fid.'" ':'').'class="g-recaptcha w100" data-sitekey="'.$this->_public_key.'" data-theme="'.$this->_theme.'" data-size="'.$this->_dsize.'"></div>';
 	}
 
 	// Generate HTML for reCAPTCHA v3
-    	public function get_html_v3()
+    	public function get_html_v3($fid=FALSE)
     	{
 		
 		$controller_name = Request::instance()->controller();
@@ -138,7 +138,7 @@ class KO7_Recaptcha {
 	                        });
 	                    });
 	                  </script>';
-	        $html .= '<input type="hidden" name="recaptcha_token" id="recaptcha-token">'; // Hidden field for the token
+	        $html .= '<input type="hidden" name="recaptcha_token" id="recaptcha-token'.(($fid!==FALSE)?'-'.$fid:'').'">'; // Hidden field for the token
 	
 	        return $html;
     	}
