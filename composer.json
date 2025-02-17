@@ -21,7 +21,7 @@
         "installer-paths": {
             "modules/{$name}": ["type:kohana-module"]
         }
-    }
+  },
   "require": {
     "php": ">=7.4",
     "google/recaptcha": "^1.3"
