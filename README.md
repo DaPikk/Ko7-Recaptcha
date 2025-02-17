@@ -60,6 +60,8 @@ recaptcha.php
 return array(
 	'public_key'  => 'YOUR GOOGLE RECAPTCHA SITE KEY',
 	'private_key' => 'YOUR GOOGLE RECAPTCHA SECRET KEY',
+	'version' => 'v2', //version required - recommended is to use v2 as it is more secure!!!
+	'rscore' => NULL, //Minimum score for safe actions, defaults to 0.5 and up - needed for Google reCaptcha version v3
         'theme' => 'light',
 	'dlang' => 'en',
         'dsize' => 'normal',
