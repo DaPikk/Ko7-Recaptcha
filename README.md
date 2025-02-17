@@ -1,4 +1,7 @@
 ![PHP workflow](https://github.com/DaPikk/Ko7-Recaptcha/actions/workflows/php.yml/badge.svg)
+![Required minimum PHP Version](https://img.shields.io/badge/PHP-=>7.4-blue)
+![Required minimum Ko7even Version](https://img.shields.io/badge/Ko7even-=>3.3.8-blue)
+
 
 # Simple wrapper for Google's reCAPTCHA library
 
@@ -8,6 +11,10 @@ A single class that allows you to add Google reCAPTCHA to your Ko7 forms. Code i
 Direct download:
 Download the [ZIP file](https://github.com/DaPikk/Ko7-Recaptcha/archive/refs/heads/main.zip)
 and extract into your project.
+
+## Requires
+* PHP => 7.4
+* Ko7even => 3.3.8
 
 ## Usage
 1. First obtain the appropriate keys for the type of reCAPTCHA you wish to
