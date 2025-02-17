@@ -1,0 +1,22 @@
+{
+  "name": "dapikk/ko7-recaptcha",
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "DaPikk/Ko7-Recaptcha",
+        "version": "1.0.0",
+        "type": "module",
+        "source": {
+          "url": "https://github.com/DaPikk/Ko7-Recaptcha.git",
+          "type": "git",
+          "reference": "master"
+        }
+      }
+    }
+  ],
+  "require": {
+    "dapikk/ko7-recaptcha": "^1",
+    "composer/installers": "^1"
+  }
+}
