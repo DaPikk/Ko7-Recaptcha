@@ -13,6 +13,10 @@ A single class that allows you to add Google reCAPTCHA to your Ko7 forms. Code i
 Direct download:
 Download the [ZIP file](https://github.com/DaPikk/Ko7-Recaptcha/archive/refs/heads/main.zip)
 and extract into your project.
+OR
+```bash
+composer require dapikk/ko7-recaptcha
+```
 
 ## Requires
 * PHP => 7.4
