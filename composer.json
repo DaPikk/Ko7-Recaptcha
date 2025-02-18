@@ -22,9 +22,6 @@
             "modules/{$name}": ["type:kohana-module"]
         }
   },
-  "archive": {
-        "exclude": ["/.github",".gitmodules"]
-  },
   "require": {
     "php": ">=7.4",
     "google/recaptcha": "^1.3"
